@@ -1,7 +1,7 @@
 Package: HMMt
 Title: HMM with Student's t emissions
 Version: 0.1
-Date: 2011-0617
+Date: 2011-10-03
 Author: Guillaume Filion
 Maintainer: Guillaume Filion <g.filion@nki.nl>
 Description: Provides HMM toolbox for t-distributed emissions.
