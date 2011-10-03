@@ -1,5 +1,5 @@
 The R package HMMt provides a modified Baum-Welch algorithm that supports multi-dimensional Student's t emission. It also handles NA and provides a 'bridge()' function to uniformize sampling rate.
 
-Please do not copy-paste the code. Instead, use 'git clone git@g1illa1me/HMMt.git' to have the full version history.
+Please do not copy-paste the code. Instead, use 'git clone git@github.com:g1illa1me/HMMt.git' to have the full version history.
 
 The code is here for reproducibility and mistake-tracking purposes, but feel free to copy, reuse and modify it in any way you like.
