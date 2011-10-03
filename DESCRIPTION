@@ -6,3 +6,4 @@ Author: Guillaume Filion
 Maintainer: Guillaume Filion <guillaume.filion@gmail.com>
 Description: Provides HMM toolbox for t-distributed emissions.
 License: GPL (>=2)
+URL: https://github.com/g1illa1me/HMMt
