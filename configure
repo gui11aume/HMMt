@@ -6,7 +6,8 @@ cat > $1 <<'EndOfScriptBody'
 #!/bin/sh
 
 DESCRUPDT=$(git status --porcelain | grep DESCRIPTION)
-if [ -n "${DESCRUPDT%%\?*}" ]; then
+REVLINE=$(grep "^Revision:" DESCRIPTION)
+if [ -n "$REVLINE" -a -n "${DESCRUPDT%%\?*}" ]; then
   cat <<NoCommit
 
   Cannot commit DESCRIPTION file with a Revision line.
