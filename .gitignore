@@ -1,0 +1,6 @@
+*.RData
+*.Rhistory
+*.o
+*.so
+*.swp
+*~
