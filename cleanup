@@ -1,0 +1,2 @@
+sed -i /^Date:/d DESCRIPTION
+sed -i /^Revision:/d DESCRIPTION

@@ -1,0 +1,69 @@
+#!/bin/sh -
+
+# Heredoc script for pre-commit hook.
+cat_script () {
+cat > $1 <<'EndOfScriptBody'
+#!/bin/sh
+
+DESCRUPDT=$(git status --porcelain | grep DESCRIPTION)
+REVLINE=$(grep "^Revision:" DESCRIPTION)
+if [ -n "$REVLINE" -a -n "${DESCRUPDT%%\?*}" ]; then
+  cat <<NoCommit
+
+  Cannot commit DESCRIPTION file with a Revision line.
+  To be able to commit you must first delete the line.
+
+  Revision was automatically added during R CMD INSTALL.
+  For future installs use:
+
+                 R CMD INSTALL --clean
+
+NoCommit
+  exit 1
+fi
+exit 0
+EndOfScriptBody
+return 0
+}
+
+# Check if repository is dirty.
+DIRTY=$(git status --porcelain)
+if [ -n "$DIRTY" ]; then
+   echo "\nGit repository is dirty."
+   echo "Commit or clean changes before install.\n"
+   exit 1
+fi
+
+GIT=${GIT_DIR:-.git}
+if [ -e "$GIT/hooks/pre-commit" ]; then
+   HASSCRIPT=$(grep 'DESCRUPDT' .git/hooks/pre-commit)
+   if [ -z "$HASSCRIPT" ]; then
+      cp -p $GIT/hooks/pre-commit.sample $GIT/hooks/pre-commit.tmp
+      echo "\nThere is already a pre-commit hoook in $GIT/hooks"
+      echo "To install the package, you must insert the following"
+      echo "lines in your current pre-commit hook (saved in file"
+      echo "$GIT/hooks/pre-commit.tmp for your convenience):\n"
+      cat_script $GIT/hooks/pre-commit.tmp
+      cat $GIT/hooks/pre-commit.tmp
+      exit 1
+   fi
+else
+   # Create pre-commit from pre-commit.sample
+   cp -p $GIT/hooks/pre-commit.sample $GIT/hooks/pre-commit
+   cat_script $GIT/hooks/pre-commit
+   echo "\nInstalled commit-lock safety to prevent"
+   echo "commiting changes caused by install process."
+   echo "Install package with R CMD INSTALL --clean"
+   echo "to unlock the safety.\n"
+fi
+
+DESCRIBE=$(git describe)
+# Example: "0.1-12-gbf0cb40"
+DATE=$(git log --max-count=1 --date=iso HEAD | grep "^Date")
+# Example: "Date: 2011-10-15 10:52:09 +0200"
+
+sed -i /^Date:/d DESCRIPTION
+echo "$DATE" >> DESCRIPTION
+echo "Revision: $DESCRIBE" >> DESCRIPTION
+
+exit 0 
