@@ -5,7 +5,7 @@ cat_script () {
 cat > $1 <<'EndOfScriptBody'
 #!/bin/sh
 
-DESCRUPDT=$(git status --porcelain | grep DESCRIPTION)
+DESCRUPDT=$(git status | grep DESCRIPTION)
 REVLINE=$(grep "^Revision:" DESCRIPTION)
 if [ -n "$REVLINE" -a -n "${DESCRUPDT%%\?*}" ]; then
   cat <<NoCommit
@@ -27,8 +27,8 @@ return 0
 }
 
 # Check if repository is dirty.
-DIRTY=$(git status --porcelain)
-if [ -n "$DIRTY" ]; then
+CLEAN=$(git status | grep "working directory clean")
+if [ -z "$CLEAN" ]; then
    echo "\nGit repository is dirty."
    echo "Commit or clean changes before install.\n"
    exit 1
