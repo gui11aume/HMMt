@@ -20,6 +20,7 @@ setClass ("HiddenMarkovModel.t",
 setClass ("fittedHiddenMarkovModel.t",
     representation = representation(
         ViterbiPath = "numeric",
+        phi = "matrix",
         logL = "numeric",
         iterations = "numeric",
         method = "character"),

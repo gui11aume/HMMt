@@ -351,8 +351,8 @@ BaumWelchT <- function (x, series.length, m = 2, Q, mu, S, nu = TRUE,
 
     # Returns an object of thethe class BaumWelchTfit.
     return(new("fittedHiddenMarkovModel.t", Q = Q, mu = mu, S = S,
-        nu = nu, model = model, ViterbiPath = vPath, logL = loglik,
-        iterations = iter))
+        nu = nu, model = model, ViterbiPath = vPath, phi = phi,
+        logL = loglik, iterations = iter))
 
 }
 
