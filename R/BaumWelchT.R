@@ -147,7 +147,7 @@ BaumWelchT <- function (x, series.length, m = 2, Q, mu, S, nu = TRUE,
         for (i in 1:m) {
             # do not update upon numerical instability.
             if (any(is.na(S[,,i])) ||
-                   det(as.matrix(S[,,i]) < num.inst)) {
+                   det(as.matrix(S[,,i])) < num.inst) {
                 next;
             }
             x.minus.mu <- sweep(x = x, MARGIN = 2, STATS = mu[i,],
