@@ -2,7 +2,7 @@
 #' 
 #' Estimate the HMM with emissions distributed as multi-dimensional correlated T variables
 #' @author Guillaume Filion.
-#' @date June 17, 2011.
+#' date: June 17, 2011.
 #' @return the estimate of the HMM with emissions distributed
 #' as multi dimensional correlated T variables.
 #' @param x matrix of observations.
@@ -19,7 +19,18 @@
 #' @param num.inst threshold for no update (see E.step()).
 #' @param tol threshold to difference in log-likelihood before returning.
 #' @param dig numeric precision for parameter estimation.
-#' @example
+#' @examples
+#' library(HMMt)
+#' x <- c(rt(1000, df=3), rt(1000, df=3)+1)
+#' 
+#' # x has a t distribution with a jump at position 1001.
+#' plot(x, type = 'l')
+#' 
+#' # Check the output of BaumWelchT. 
+#' BaumWelchT(x)
+#' 
+#' # See that it usually finds the transition.
+#' lines(BaumWelchT(x)$ViterbiPath-1, col=2)
 #' @export 
 BaumWelchT <- function (x, series.length, m = 2, Q, mu, S, nu = TRUE,
      model, initial.prob, maxiter = 500, overflow = 1e-9, num.inst = 1e-9,
