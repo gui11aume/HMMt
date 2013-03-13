@@ -1,25 +1,29 @@
+#' BaumWelchT HMM
+#' 
+#' Estimate the HMM with emissions distributed as multi-dimensional correlated T variables
+#' @author Guillaume Filion.
+#' @date June 17, 2011.
+#' @return the estimate of the HMM with emissions distributed
+#' as multi dimensional correlated T variables.
+#' @param x matrix of observations.
+#' @param series.length length of independent blocks in matrix x.
+#' @param m number of states.
+#' @param Q transition matrix.
+#' @param mu means of the emissions in different states.
+#' @param S correlation matrix of the emissions.
+#' @param nu degrees of freedom (in all states).
+#' @param model a model matrix for parameter estimation.
+#' @param initial.prob state probability at the start of series.
+#' @param maxiter maximum number of iterations before returning.
+#' @param overflow the probability ratio in case of numeric overflow.
+#' @param num.inst threshold for no update (see E.step()).
+#' @param tol threshold to difference in log-likelihood before returning.
+#' @param dig numeric precision for parameter estimation.
+#' @example
+#' @export 
 BaumWelchT <- function (x, series.length, m = 2, Q, mu, S, nu = TRUE,
      model, initial.prob, maxiter = 500, overflow = 1e-9, num.inst = 1e-9,
      tol = 1e-05, dig = 3) {
-# Author: Guillaume Filion.
-# Date: June 17, 2011.
-# Return the estimate of the HMM with emissions distributed
-# as multi dimensional correlated T variables.
-# x: matrix of observations.
-# series.length: length of independent blocks in matrix x.
-# m: number of states.
-# Q: transition matrix.
-# mu: means of the emissions in different states.
-# S: correlation matrix of the emissions.
-# nu: degrees of freedom (in all states).
-# model: a model matrix for parameter estimation.
-# initial.prob: state probability at the start of series.
-# maxiter: maximum number of iterations before returning.
-# overflow: the probability ratio in case of numeric overflow.
-# num.inst: threshold for no update (see E.step()).
-# tol: threshold to difference in log-likelihood before returning.
-# dig: numeric precision for parameter estimation.
-
 
 ###############################################
 #              OPTION PROCESSING              #
