@@ -1,2 +1,2 @@
 useDynLib(HMMt)
-export(BaumWelchT)
+export(BaumWelchT, bridge, Viterbi)
