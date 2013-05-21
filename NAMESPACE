@@ -1,1 +1,2 @@
+useDynLib(HMMt)
 export(BaumWelchT)
