@@ -27,7 +27,7 @@ return 0
 }
 
 # Check if repository is dirty.
-CLEAN=$(git status | grep "working directory clean")
+CLEAN=$(git status | grep "clean")
 if [ -z "$CLEAN" ]; then
    echo "\nGit repository is dirty."
    echo "Commit or clean changes before install.\n"
